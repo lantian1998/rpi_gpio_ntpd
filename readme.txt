@@ -36,11 +36,9 @@ At this step you must build and install the program:
 	sudo make install
 
 You probably want to let rpi_gpio_ntp start at boot.
-To do so, edit /etc/rc.local
-	sudo vi /etc/rc.local
-and add the following line (BEFORE the "exit 0" statement and AFTER the "#!/bin/sh" line):
-	/usr/local/bin/rpi_gpio_ntp -N 1 -g 8
-This assumes that the PPS signal of the GPS (or your rubidium clock or whatever) is connected to GPIO pin 8 which is physical pin 24.
+- To change the GPIO pin for the PPS signal of your GPS (or Rubidium clock,
+  or whatever), edit `/etc/default/rpio_gpio_ntp`
+- To start the service at boot, run `systemctl enable --now rpi_gpio_ntp`.
 
 The last step is configuring ntpd.
 	sudo vi /etc/ntp.conf
