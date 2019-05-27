@@ -1,0 +1,11 @@
+[Unit]
+Description=Create /dev/gps0 symbolic link
+Before=rpi_gpio_ntp.service
+Before=ntp.service
+
+[Service]
+EnvironmentFile=-/etc/default/gps0
+ExecStart=/bin/ln -sf $ORIG_DEVICE /dev/gps0
+
+[Install]
+WantedBy=multiuser.target

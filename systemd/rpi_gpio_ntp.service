@@ -1,6 +1,9 @@
 [Unit]
 Description=Raspberry Pi GPIO-PPS-to-NTP-SHM translator
 Documentation=https://vanheusden.com/time/rpi_gpio_ntp/
+Requires=gps0.service
+Requires=gpsd.service
+Requires=ntp.service
 
 [Service]
 EnvironmentFile=/etc/default/rpi_gpio_ntp
