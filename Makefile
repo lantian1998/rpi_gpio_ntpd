@@ -14,7 +14,7 @@ rpi_gpio_ntp: $(OBJS)
 install: rpi_gpio_ntp
 	cp rpi_gpio_ntp /usr/local/bin
 	if [ ! -f /etc/default/rpi_gpio_ntp ]; then cp rpi_gpio_ntp.env /etc/default/rpi_gpio_ntp; fi
-	install --backup rpi_gpio_ntp.service /etc/systemd/system/
+	install --backup --mode 644 rpi_gpio_ntp.service /etc/systemd/system/
 	systemctl daemon-reload
 
 clean:
