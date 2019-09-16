@@ -8,6 +8,8 @@ Requires=ntp.service
 [Service]
 EnvironmentFile=/etc/default/rpi_gpio_ntp
 ExecStart=/usr/local/bin/rpi_gpio_ntp -f -N $SHMSEG -g $GPIO $OPTS
+ExecStartPost=/bin/sh -c "echo $MAINPID > /sys/fs/cgroup/cpu/tasks"
+ExecStartPost=/usr/bin/chrt -r -p 99 $MAINPID
 Restart=always
 
 [Install]

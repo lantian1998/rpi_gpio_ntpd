@@ -143,22 +143,6 @@ void notify_ntp(struct shmTime *const pst, int *fudge_s, int *fudge_ns, struct t
 	}
 }
 
-void set_nice(void)
-{
-	if (nice(-20) == -1)
-		error_exit("nice() failed");
-}
-
-void set_prio(void)
-{
-	struct sched_param p;
-
-	p.sched_priority = sched_get_priority_max(SCHED_RR);
-
-	if (sched_setscheduler(0, SCHED_RR, &p) == -1)
-		error_exit("sched_setscheduler() failed");
-}
-
 int get_value(const int fd)
 {
 	static char c[32];
@@ -464,10 +448,6 @@ int main(int argc, char *argv[])
 		gpio_export(gpio_pps_out_pin);
 		gpio_set_dir(gpio_pps_out_pin, 1);
 	}
-
-	set_nice();
-
-	set_prio();
 
 	if (gpio_pps_in_pin_path)
 	{
